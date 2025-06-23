@@ -2,7 +2,24 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
 
-  alert("this is just test block");
+  const url = "https://publish-p152536-e1620746.adobeaemcloud.com/graphql/execute.json/CHG/GetEventList";
+
+fetch(url, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ variables: {} })
+})
+.then(res => res.json())
+.then(data => {
+  const firstEvent = data.data.eventList.items[0];
+  alert(`Title: ${firstEvent.title}\nDescription: ${firstEvent.description}\nCategory: ${firstEvent.category}`);
+})
+.catch(err => {
+  console.error("Error:", err);
+  alert("Failed to fetch event data.");
+});
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
