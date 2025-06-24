@@ -5,11 +5,10 @@ export default function decorate(block) {
   const url = "https://publish-p152536-e1620746.adobeaemcloud.com/graphql/execute.json/CHG/GetEventList";
 
 fetch(url, {
-  method: "POST",
+  method: "GET",
   headers: {
     "Content-Type": "application/json",
-  },
-  body: JSON.stringify({ variables: {} })
+  }
 })
 .then(res => res.json())
 .then(data => {
